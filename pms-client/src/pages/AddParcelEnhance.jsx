@@ -88,7 +88,7 @@ const AddParcel = () => {
         );
 
       await createParcel(cleanparcelData);
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Error creating parcel:', error);
     } finally {

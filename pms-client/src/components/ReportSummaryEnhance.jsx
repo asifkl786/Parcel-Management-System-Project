@@ -51,29 +51,7 @@ const ReportSummaryEnhance = () => {
     }
   };
 
-  // const handleExport = async (type) => {
-  //   try {
-  //     setExporting(prev => ({ ...prev, [type]: true }));
-  //     setError(null);
-      
-  //     const { startDate, endDate } = formik.values;
-      
-  //     if (!startDate || !endDate) {
-  //       throw new Error('Please select date range first');
-  //     }
-
-  //     const blob = await exportReport(type, startDate, endDate);
-  //     downloadFile(
-  //       blob, 
-  //       `parcels_report_${startDate}_to_${endDate}.${type}`
-  //     );
-  //   } catch (err) {
-  //     setError(err.message);
-  //   } finally {
-  //     setExporting(prev => ({ ...prev, [type]: false }));
-  //   }
-  // };
-
+  
   // In your ReportSummaryEnhance component
     const handleExport = async (type) => {
       try {

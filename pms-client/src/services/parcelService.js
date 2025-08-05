@@ -2,15 +2,29 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8080/api/parcels';
 
+// Create Axios instance with token interceptor
+const axiosInstance  = axios.create({
+  baseURL: API_URL,
+});
+
+// Auto-attach Bearer token to every request
+axiosInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 // This is get Parcles method 
 export const getParcels = async () => {
-  const response = await axios.get(`${API_URL}/parcels`,);
+  const response = await axiosInstance.get(`${API_URL}/parcels`,);
   return response.data;
 };
 
 // This is getparcel by id
 export const getParcelById = async (id) => {
-  const response = await axios.get(`${API_URL}/${id}`);
+  const response = await axiosInstance.get(`${API_URL}/${id}`);
   return response.data;
 };
 
@@ -35,8 +49,8 @@ export const updateParcel = async (id, parcelData) => {
   try {  
     const response = await axios.put(`${API_URL}/${id}/update`, parcelData,{
     headers: {
-      //  'Content-Type': 'multipart/form-data',
          'Content-Type':'application/json',
+         'Authorization': `Bearer ${localStorage.getItem('token')}`
     },
   });
     return response.data;
@@ -63,7 +77,7 @@ export const markAsDelivered = async (id) => {
 };
 
 export const getParcelByTrackingNumber = async (trackingNumber) => {
-  const response = await axios.get(`${API_URL}/tracking?number=${trackingNumber}`);
+  const response = await axiosInstance.get(`${API_URL}/tracking?number=${trackingNumber}`);
   return response.data;
 };
 
@@ -89,20 +103,23 @@ export const uploadParcel = async (parcelData) => {
 /*--------------------------------------------------------------Pagination Code Start------------------------------------------------*/
 
 export const getParcelsWithPagination = async (page = 0, size = 5, sortBy = 'receivedAt', sortDir = 'desc') => {
-  const response = await axios.get(`${API_URL}`, {
+  const response = await axiosInstance.get(`${API_URL}`, {
     params: { 
       page, 
       size,
       sortBy,
       sortDir
-    }
+    },
   });
   return response.data;
 };
 
 export const getParcelsByStatus = async (status, page = 0, size = 10) => {
   const response = await axios.get(`${API_URL}/filter`, {
-    params: { status, page, size }
+    params: { status, page, size },
+    headers: {
+        Authorization: `Bearer ${token}`
+    },
   });
   return response.data;
 };
@@ -127,10 +144,20 @@ export const createParcel = async (parcelData) => {
   formData.append('status', parcelData.status);
   formData.append('receivedAt', parcelData.receivedAt);
   formData.append('estimatedDeliveryAt', parcelData.estimatedDeliveryAt);
-  formData.append('deliveredAt', parcelData.deliveredAt || '');
-  formData.append('imageFile', parcelData.imageFile); // Must match field name in DTO
+ // formData.append('deliveredAt', parcelData.deliveredAt || '');
+ // formData.append('imageFile', parcelData.imageFile); // Must match field name in DTO
 
-   const response = await axios.post(`${API_URL}/create`, formData, {
+  // Best practice to handle separate file and date  ✔ Skips empty date fields,✔ Adds file only if present
+   
+    if (parcelData.deliveredAt) {
+      formData.append("deliveredAt", parcelData.deliveredAt);
+    }
+
+    if (parcelData.imageFile) {
+      formData.append("imageFile", parcelData.imageFile);
+    }
+
+   const response = await axiosInstance.post(`${API_URL}/create`, formData, {
      headers:{
          'Content-Type': 'multipart/form-data',
      },

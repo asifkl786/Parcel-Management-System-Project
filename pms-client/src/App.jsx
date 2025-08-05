@@ -8,7 +8,8 @@ import Sidebar from './components/Sidebar';
 import ParcelDetails from './pages/ParcelDetails';
 import AddParcelEnhance from './pages/AddParcelEnhance';
 import ReportSummaryEnhance from './components/ReportSummaryEnhance';
-
+import LoginFormikYup from './components/auth/LoginFormikYup';
+import RegisterFormikYup from './components/auth/RegisterFormikYup';
 
 function App() {
   return (
@@ -16,10 +17,13 @@ function App() {
       <div className="flex h-screen bg-gray-100">
         <Sidebar />
         <div className="flex-1 flex flex-col overflow-hidden">
-          <Navbar />
+           <Navbar />  
           <main className="flex-1 overflow-y-auto p-4">
             <Routes>
-              <Route path="/" element={<DashboardWithPaginationEnhance />} />
+               {/* 🔓 Public Routes */}
+                <Route path="/" element={<LoginFormikYup />} />
+                <Route path="/register" element={<RegisterFormikYup />} />
+              <Route path="/dashboard" element={<DashboardWithPaginationEnhance />} />
               <Route path="/parcels" element={<Parcels />} />
               <Route path="/add-parcel" element={<AddParcelEnhance />} />
               <Route path="/edit-parcel/:id" element={<EditParcel />} />

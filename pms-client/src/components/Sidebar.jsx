@@ -12,7 +12,7 @@ const Sidebar = () => {
   const location = useLocation();
 
   const navigation = [
-    { name: 'Dashboard', href: '/', icon: HomeIcon },
+    { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
     { name: 'Parcels', href: '/parcels', icon: CubeIcon },
     { name: 'Add Parcel', href: '/add-parcel', icon: PlusIcon },
     { name: 'Tracking', href: '/tracking', icon: TruckIcon },
