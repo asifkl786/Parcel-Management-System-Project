@@ -68,7 +68,10 @@ const Parcels = () => {
     { value: 'ALL', label: 'All Statuses' },
     { value: 'RECEIVED', label: 'Received' },
     { value: 'IN_STORAGE', label: 'In Storage' },
-    { value: 'DELIVERED', label: 'Delivered' }
+    { value: 'IN_TRANSIT', label: 'In Transit' },
+    { value: 'DELIVERED', label: 'Delivered' },
+    { value: 'RETURNED', label: 'Returned' },
+    { value: 'FAILED_DELIVERY',label: 'Failed Delivery'}
   ];
 
   return (

@@ -1,7 +1,14 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+  text-align: center;
+} */
+ #root {
+  width: 100%;
+  max-width: none; /* Remove container restriction */
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
@@ -40,3 +47,18 @@
 .read-the-docs {
   color: #888;
 }
+/*----------------Start code for image ---------------------------------*/
+/* @keyframes zoomInBackground {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.animate-zoom {
+  animation: zoomInBackground 20s ease-in-out infinite alternate;
+} */
+
+/*----------------End code for image ---------------------------------*/

@@ -1,16 +1,30 @@
-import { TruckIcon, CheckIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { 
+  TruckIcon, 
+  CheckIcon, 
+  ClockIcon, 
+  ArrowUturnLeftIcon, 
+  PaperAirplaneIcon, 
+  XCircleIcon 
+} from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 
+// Tailwind doesn't have "slow" animations by default for bounce/spin, so we add custom classes via inline style
 const statusIcons = {
-  DELIVERED: <CheckIcon className="h-5 w-5 text-green-500" />,
-  IN_STORAGE: <TruckIcon className="h-5 w-5 text-yellow-500" />,
-  RECEIVED: <ClockIcon className="h-5 w-5 text-blue-500" />
+  DELIVERED: <CheckIcon className="h-5 w-5 text-green-500 animate-pulse" />,
+  IN_STORAGE: <TruckIcon className="h-5 w-5 text-yellow-500 animate-bounce" style={{ animationDuration: '2s' }} />,
+  RECEIVED: <ClockIcon className="h-5 w-5 text-blue-500 animate-spin" style={{ animationDuration: '3s' }} />,
+  RETURN: <ArrowUturnLeftIcon className="h-5 w-5 text-purple-500 animate-[spin_1.5s_linear_infinite]" style={{ animationDirection: 'reverse' }} />,
+  IN_TRANSIT: <PaperAirplaneIcon className="h-5 w-5 text-orange-500 animate-bounce" />,
+  FAILED_DELIVERY: <XCircleIcon className="h-5 w-5 text-red-500 animate-pulse" />
 };
 
 const statusColors = {
   DELIVERED: 'bg-green-100 text-green-800',
   IN_STORAGE: 'bg-yellow-100 text-yellow-800',
-  RECEIVED: 'bg-blue-100 text-blue-800'
+  RECEIVED: 'bg-blue-100 text-blue-800',
+  RETURN: 'bg-purple-100 text-purple-800',
+  IN_TRANSIT: 'bg-orange-100 text-orange-800',
+  FAILED_DELIVERY: 'bg-red-100 text-red-800'
 };
 
 const ParcelCard = ({ parcel }) => {
@@ -22,8 +36,8 @@ const ParcelCard = ({ parcel }) => {
             <h3 className="text-lg font-semibold text-gray-800">{parcel.trackingNumber}</h3>
             <p className="text-sm text-gray-500">To: {parcel.recipientName}</p>
           </div>
-          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColors[parcel.status]}`}>
-            {statusIcons[parcel.status]}
+          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColors[parcel.status] || 'bg-gray-100 text-gray-800'}`}>
+            {statusIcons[parcel.status] || null}
             <span className="ml-1 capitalize">
               {parcel.status.toLowerCase().replace('_', ' ')}
             </span>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_API_URL = 'http://localhost:8080/api';
+const BASE_API_URL = import.meta.env.VITE_API_BASE ||'http://localhost:8080/api';
 
 
 // Create Axios instance with token interceptor

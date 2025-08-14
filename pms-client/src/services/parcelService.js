@@ -18,7 +18,7 @@ axiosInstance.interceptors.request.use((config) => {
 
 // This is get Parcles method 
 export const getParcels = async () => {
-  const response = await axiosInstance.get(`${API_URL}/parcels`,);
+  const response = await axiosInstance.get(`${API_URL}/all`,);
   return response.data;
 };
 

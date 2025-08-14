@@ -4,6 +4,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { getParcelById, updateParcel } from '../services/parcelService';
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditParcel = () => {
   const { id } = useParams();
@@ -52,10 +54,16 @@ const EditParcel = () => {
   });
   
   const formatDateForInput = (dateString) => {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    return date.toISOString().slice(0, 16);
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  if (isNaN(date)) return ''; // add safety check
+  return date.toISOString().slice(0, 16); // for datetime-local
   };
+  // const formatDateForInput = (dateString) => {
+  //   if (!dateString) return '';
+  //   const date = new Date(dateString);
+  //   return date.toISOString().slice(0, 16);
+  // };
 
   const onSubmit = async (values, { setSubmitting }) => {
     try {
@@ -78,8 +86,10 @@ const EditParcel = () => {
       );
 
       await updateParcel(id, cleanData);
+      toast.success("✅ Parcel updated successfully!", { position: 'top-center' });
       navigate('/dashboard');
     } catch (error) {
+      toast.error("❌ Error updated parcel", { position: 'top-center' });
       console.error('Error updating parcel:', error);
       setError(error.response?.data?.message || 'Failed to update parcel. Please try again.');
     } finally {
@@ -348,7 +358,7 @@ const EditParcel = () => {
             <div className="flex justify-end space-x-3 pt-4 border-t">
               <button
                 type="button"
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/dashboard')}
                 className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 Cancel

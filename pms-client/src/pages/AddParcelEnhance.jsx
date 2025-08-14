@@ -2,6 +2,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { createParcel } from '../services/parcelService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddParcel = () => {
   const navigate = useNavigate();
@@ -88,8 +90,10 @@ const AddParcel = () => {
         );
 
       await createParcel(cleanparcelData);
+      toast.success("✅ Parcel created successfully!", { position: 'top-center' });
       navigate('/dashboard');
     } catch (error) {
+      toast.error("❌ Error adding parcel", { position: 'top-center' });
       console.error('Error creating parcel:', error);
     } finally {
       setSubmitting(false);
@@ -172,6 +176,7 @@ const AddParcel = () => {
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   >
                     <option value="RECEIVED">Received</option>
+                    <option value="IN_STORAGE">In Storage</option>
                     <option value="IN_TRANSIT">In Transit</option>
                     <option value="DELIVERED">Delivered</option>
                     <option value="RETURNED">Returned</option>

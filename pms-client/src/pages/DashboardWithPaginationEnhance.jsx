@@ -209,7 +209,7 @@ const DashboardWithPaginationEnhance = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {parcel.deliveredAt ? new Date(parcel.deliveredAt).toLocaleString() : 'N/A'}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    {/* <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <Link
                         to={`/edit-parcel/${parcel.id}`}
                         className="text-blue-600 hover:text-blue-900 mr-3"
@@ -222,7 +222,59 @@ const DashboardWithPaginationEnhance = () => {
                       >
                         Track
                       </Link>
+                    </td> */}
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex gap-2 justify-end">
+                    <Link
+                      to={`/edit-parcel/${parcel.id}`}
+                      className="p-2 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 transition"
+                      title="Edit Parcel"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652l-9.193 9.193a4.5 
+                          4.5 0 01-1.897 1.13l-3.177.794.794-3.177a4.5 4.5 0 
+                          011.13-1.897l9.193-9.193z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19.5 7.125L16.862 4.487"
+                        />
+                      </svg>
+                    </Link>
+
+                    <Link
+                      to={`/tracking?number=${parcel.trackingNumber}`}
+                      className="p-2 rounded-full bg-green-50 hover:bg-green-100 text-green-600 transition"
+                      title="Track Parcel"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 6v6h4.5M21 12a9 9 0 11-18 
+                          0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </Link>
                     </td>
+
                   </tr>
                 ))
               ) : (
