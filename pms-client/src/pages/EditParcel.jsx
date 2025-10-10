@@ -131,7 +131,7 @@ const EditParcel = () => {
 
   return (
     <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow">
-      <h2 className="text-2xl font-bold mb-6">Edit Parcel</h2>
+      <h2 className="text-2xl text-center font-bold mb-6">Edit Parcel</h2>
       
       {error && (
         <div className="mb-4 p-4 bg-red-50 border-l-4 border-red-500">
