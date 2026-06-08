@@ -59,11 +59,6 @@ const EditParcel = () => {
   if (isNaN(date)) return ''; // add safety check
   return date.toISOString().slice(0, 16); // for datetime-local
   };
-  // const formatDateForInput = (dateString) => {
-  //   if (!dateString) return '';
-  //   const date = new Date(dateString);
-  //   return date.toISOString().slice(0, 16);
-  // };
 
   const onSubmit = async (values, { setSubmitting }) => {
     try {

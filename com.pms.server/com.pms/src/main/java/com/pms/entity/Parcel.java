@@ -28,11 +28,6 @@ public class Parcel {
     @Column(name = "tracking_number", unique = true)
     private String trackingNumber;
     
-   
-    // private String status; // Received, In Storage, Delivered
-
-     //    private LocalDateTime receivedAt;
-     //    private LocalDateTime deliveredAt;
     private Instant receivedAt;
     private Instant deliveredAt;
     private Instant estimatedDeliveryAt;

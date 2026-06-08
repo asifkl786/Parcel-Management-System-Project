@@ -82,7 +82,7 @@
 			</dependency>
 			<!-- Dependency for PDP and EXCEL Report Export Start  -->
 			<!-- Apache POI for Excel -->
-				<dependency>
+				<!--<dependency>
 				    <groupId>org.apache.poi</groupId>
 				    <artifactId>poi</artifactId>
 				    <version>5.2.2</version>
@@ -91,7 +91,7 @@
 				    <groupId>org.apache.poi</groupId>
 				    <artifactId>poi-ooxml</artifactId>
 				    <version>5.2.2</version>
-				</dependency>
+				</dependency>-->
 				
 				<!-- OpenPDF for PDF generation -->
 				<dependency>
